@@ -10,8 +10,20 @@ public class Card {
         this.suit = suit;
     }
 
-    // TODO: Crea los "getters" para rank, value y suit.
+    public int getValue() {
+        return value;
+    }
 
-    // TODO: Sobrescribe el método toString() para que al imprimir la carta
-    // se lea bonito, por ejemplo: "Q of HEARTS"
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    @Override
+    public String toString() {
+        return rank + " of " + suit;
+    }
 }
