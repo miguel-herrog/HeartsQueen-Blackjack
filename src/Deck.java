@@ -7,19 +7,25 @@ public class Deck {
 
     public Deck() {
         this.cards = new ArrayList<>();
-        // TODO: Llama a un método privado aquí para inicializar las 52 cartas
+        initializeDeck();
     }
 
     private void initializeDeck() {
-        // TODO: Usa bucles para crear todas las cartas y añadirlas al ArrayList 'cards'
+        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+        int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
+
+        for (Suit suit : Suit.values()){
+            for (int i =0 ; i < ranks.length; i++){
+                cards.add(new Card(ranks [i], values[i], suit));
+            }
+        }
     }
 
     public void shuffle() {
-        // TODO: Usa Collections.shuffle() para mezclar la baraja
+        Collections.shuffle(cards);
     }
 
     public Card drawCard() {
-        // TODO: Saca la primera carta (índice 0) del ArrayList, elimínala de la lista y devuélvela.
-        return null; // Cambia esto cuando implementes la lógica
+        return cards.remove(0);
     }
 }
