@@ -11,17 +11,32 @@ public class Player {
     }
 
     public void addCardToHand(Card card) {
-        // TODO: Añade la carta recibida al ArrayList 'hand'
+        hand.add(card);
     }
 
     public int calculateScore() {
-        int score = 0;
-        // TODO: Recorre la mano y suma los valores. 
-        // RETO: Añade la lógica para que el As ("A") valga 1 en lugar de 11 si el score se pasa de 21.
+        int score = 0, aces = 0;
+
+        for (Card h : hand){
+            score += h.getValue();
+
+            if (h.getRank().equals("A")){
+                aces += 1;
+            }
+        }
+        while (score > 21 && aces > 0){
+            score -= 10;
+            aces -= 1;
+        }
         return score;
     }
 
     public void showHand() {
-        // TODO: Imprime por consola las cartas que tiene el jugador actualmente
+        System.out.println("--- " + name + "'s Hand ---");
+        for (Card c : hand) {
+            System.out.println("- " + c);
+        }
+        System.out.println("Current Score: " + calculateScore());
+        System.out.println("-------------------");
     }
 }
