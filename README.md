@@ -2,6 +2,8 @@
 
 A text-based, interactive console game built purely in Java. Challenge the Queen of Hearts to a high-stakes game of Blackjack where your head is on the line.
 
+![Hearts Queen Gameplay Demo](assets/gameplay.png)
+
 ## 🎯 Project Overview
 This project was developed to solidify core concepts of **Object-Oriented Programming (OOP)**, logical structuring, and game loop mechanics in Java. It serves as a foundational milestone for my game development portfolio.
 
