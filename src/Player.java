@@ -39,4 +39,11 @@ public class Player {
         System.out.println("Current Score: " + calculateScore());
         System.out.println("-------------------");
     }
+
+    public void showFirstCard() {
+        System.out.println("--- " + name + "'s Hand ---");
+        System.out.println("- " + hand.get(0));
+        System.out.println("- [Hidden Card]");
+        System.out.println("-------------------");
+    }
 }
