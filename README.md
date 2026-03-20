@@ -1,34 +1,30 @@
-# 🃏 Heart's Queen: Blackjack in Wonderland (v2.0)
+# 🃏 Heart's Queen: Blackjack in Wonderland (v3.0 - The Tower)
 
-A text-based, interactive console game built purely in Java. Challenge the Queen of Hearts to a high-stakes game of Blackjack where your head—and your chips—are on the line.
+A text-based, interactive console RPG game built purely in Java. Climb the Wonderland Tower by bankrupting a cast of iconic characters in high-stakes games of Blackjack, leading up to the final showdown with the Queen of Hearts.
 
 ![Hearts Queen Gameplay Demo](assets/gameplay.png)
 
 ## 🎯 Project Overview
-This project is continually evolving to solidify core concepts of **Object-Oriented Programming (OOP)**, logical structuring, and game loop mechanics in Java. It serves as a foundational milestone for my game development portfolio.
+This project showcases the evolution from a simple console script into a structured, scalable application. It demonstrates a strong understanding of **Object-Oriented Programming (OOP)**, software architecture, and robust error handling in Java.
 
 ### ✨ Key Features
-* **Casino Economy System:** Players start with a chip balance, place bets before each round, and manage their bankroll. The game continues until the player goes bankrupt.
-* **Continuous Game Loop:** State management allows the deck to reset and hands to clear between rounds without restarting the application.
-* **Classic Blackjack AI:** The Queen follows strict casino rules (must hit until 17).
-* **Dynamic Ace Logic:** The algorithm automatically adjusts the value of Aces (11 or 1) to prevent the player or the AI from busting.
-* **Game Feel:** Custom thread-pausing mechanics (`Thread.sleep`) are implemented to create pacing and suspense during the AI's turn and the final reveal.
+* **The Boss Rush (Progression System):** Face three distinct opponents (The Mad Hatter, The Cheshire Cat, and The Queen). You must bankrupt each boss to advance to the next floor.
+* **Unique AI Behaviors:** Each boss features custom logic and risk tolerance. The Hatter stands at 15, the Queen at 17, and the Cat gambles until 18.
+* **Dedicated Game Engine:** A centralized `GameEngine` class dynamically handles the rules, pacing, and economy of any encounter regardless of the opponent.
+* **Bulletproof Input Handling:** The betting phase is protected against invalid user inputs (letters, empty spaces) using structured `try-catch` blocks, preventing application crashes.
+* **Dynamic Ace Logic:** Aces automatically adjust their value (11 or 1) to optimize the hand score.
 
-## 🛠️ Tech Stack & Concepts
+## 🛠️ Tech Stack & Architecture
 * **Language:** Java
-* **Data Structures:** `ArrayList` for dynamic deck and hand management.
 * **OOP Principles Applied:**
-  * **Encapsulation:** Immutable `Card` objects and secure chip balance management.
-  * **State Management:** Persisting player stats (chips) across multiple instances of the core game loop.
-  * **Enums:** Type-safe definitions for card suits.
+  * **Inheritance & Polymorphism:** Opponents are subclasses of a base `Player` class, overriding the `playTurn()` method to inject their unique logic while being processed identically by the `GameEngine`.
+  * **Single Responsibility Principle (SRP):** Complete separation of concerns between game execution (`Main`), rule arbitration (`GameEngine`), and state management (`Player`).
+  * **Encapsulation:** Protected chip balances and isolated deck management.
+* **Error Handling:** Implementation of `NumberFormatException` catching to sanitize standard input streams.
 
 ## 🚀 How to Play
 1. Compile the Java files located in the `src` directory.
 2. Run the `Main` class.
-3. Place your bet from your starting balance of 100 chips.
-4. Follow the console prompts, typing `H` to Hit (draw a card) or `S` to Stand.
-5. Survive the Queen's turn, win your bets, and try not to go bankrupt!
-
-## 🛣️ Future Roadmap (v3.0 - The Wonderland Tower)
-* **Boss Rush Mechanics:** Implement inheritance to create distinct opponents (e.g., The Mad Hatter, The Cheshire Cat) with unique AI behaviors and minimum bets.
-* **Narrative Progression:** Add a story mode with dialogue choices and a definitive win condition (escaping Wonderland).
+3. You start with 100 chips. Your goal is to drain the chips of the boss in front of you.
+4. Place your bet, then type `H` to Hit or `S` to Stand.
+5. Defeat the Mad Hatter, survive the Cheshire Cat, and bankrupt the Queen of Hearts to escape Wonderland!
