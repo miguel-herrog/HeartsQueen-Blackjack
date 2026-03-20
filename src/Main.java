@@ -85,4 +85,12 @@ public class Main {
         }
         scanner.close();
     }
+
+    public static void pause (int miliseconds) {
+        try {
+            Thread.sleep(miliseconds);
+        } catch (InterruptedException e) {
+            System.out.println("Error pausing the game.");
+        }
+    }
 }
