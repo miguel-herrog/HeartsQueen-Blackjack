@@ -4,10 +4,12 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private ArrayList<Card> hand;
+    private int chips;
 
     public Player(String name) {
         this.name = name;
         this.hand = new ArrayList<>();
+        this.chips = 100;
     }
 
     public void addCardToHand(Card card) {
@@ -45,5 +47,17 @@ public class Player {
         System.out.println("- " + hand.get(0));
         System.out.println("- [Hidden Card]");
         System.out.println("-------------------");
+    }
+
+    public int getChips() {
+        return chips;
+    }
+
+    public void adjustChips(int amount) {
+        this.chips += amount;
+    }
+
+    public void clearHand() {
+        this.hand.clear();
     }
 }
