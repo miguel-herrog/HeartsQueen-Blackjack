@@ -12,6 +12,10 @@ public class Player {
         this.chips = 100;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addCardToHand(Card card) {
         hand.add(card);
     }
@@ -59,5 +63,8 @@ public class Player {
 
     public void clearHand() {
         this.hand.clear();
+    }
+
+    public void playTurn(Deck deck) {
     }
 }
