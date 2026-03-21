@@ -9,6 +9,7 @@ public class Shop {
     public Shop() {
         this.catalog = new ArrayList<>();
 
+        catalog.add(new AcesHighItem());
         catalog.add(new RabbitFootItem());
         catalog.add(new MadTeaItem());
     }
