@@ -1,4 +1,5 @@
 package items;
+import core.SaveManager;
 import entities.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class Shop {
         catalog.add(new MadTeaItem());
     }
 
-    public void visitShop(Player player, Scanner scanner) {
+    public void visitShop(Player player, Scanner scanner, int progress) {
         System.out.println("\n=====================================");
         System.out.println("⛺ THE MYSTERIOUS MERCHANT ⛺");
         System.out.println("'Welcome, traveler... Care to trade some chips for survival?'");
@@ -29,6 +30,7 @@ public class Shop {
                 System.out.println((i + 1) + ". " + item.getName() + " - " + item.getPrice() + " chips");
                 System.out.println("   * " + item.getDescription());
             }
+            System.out.println("9. Save Game");
             System.out.println("0. Leave shop");
             System.out.println("-------------------------------------");
 
@@ -41,7 +43,7 @@ public class Shop {
                     String input = scanner.nextLine();
                     choice = Integer.parseInt(input);
 
-                    if (choice > catalog.size() || choice < 0) {
+                    if ((choice > catalog.size() && choice != 9) || choice < 0) {
                         System.out.println("'I don't sell that. Pick a valid number.'");
                     } else {
                         validChoice = true;
@@ -55,6 +57,9 @@ public class Shop {
             if (choice == 0) {
                 System.out.println("'Good luck out there... You'll need it.'");
                 shopping = false;
+            } else if (choice == 9) {
+                SaveManager saveManager = new SaveManager();
+                saveManager.saveGame(player, progress);
             } else {
                 Item selectedItem = catalog.get(choice - 1);
                 if (player.getChips() >= selectedItem.getPrice()) {

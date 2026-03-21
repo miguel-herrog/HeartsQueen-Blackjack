@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class GameEngine {
     private Scanner scanner;
+    core.SaveManager saveManager = new core.SaveManager();
 
     public GameEngine() {
         this.scanner = new Scanner(System.in);
@@ -99,9 +100,6 @@ public class GameEngine {
             // Check if Alice lost her head before the boss even plays
             if (player.calculateScore() > 21) {
                 if (player.consumeItem("Rabbit's Foot")) {
-                    System.out.println("\n✨ THE RABBIT'S FOOT GLOWS! ✨");
-                    System.out.println("It crumbles to dust, but it saves you from busting!");
-                    System.out.println("Your score is magically locked at 21. Your turn ends.");
                     usedRabbit = true;
                 } else {
                     System.out.println("BUST! You went over 21. " + boss.getName() + " laughs as you lose your chips!");
@@ -151,11 +149,13 @@ public class GameEngine {
         if (player.getChips() <= 0) {
             System.out.println("\n*** BANKRUPT ***");
             System.out.println(boss.getName() + " took all your chips! The guards drag you away.");
-            return false; // Perdiste
+            saveManager.deleteSave();
+            return false; // You Lost
+
         } else {
             System.out.println("\n*** VICTORY! ***");
             System.out.println("You bankrupted " + boss.getName() + "! You advance to the next floor.");
-            return true; // Ganaste
+            return true; // You Won
         }
     }
 }

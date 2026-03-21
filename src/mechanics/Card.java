@@ -23,6 +23,23 @@ public class Card {
         return rank;
     }
 
+    public String getSuitSymbol() {
+        switch (this.suit) {
+            case HEARTS: return "H";
+            case DIAMONDS: return "D";
+            case CLUBS: return "C";
+            case SPADES: return "S";
+            default: return "?";
+        }
+    }
+
+    public String getShortRank() {
+        if (this.rank.equals("10")) {
+            return "10";
+        }
+        return this.rank.substring(0, 1).toUpperCase();
+    }
+
     @Override
     public String toString() {
         return rank + " of " + suit;

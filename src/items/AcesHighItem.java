@@ -13,7 +13,7 @@ public class AcesHighItem extends Item {
         System.out.println("\n🃏 YOU SLIP AN ACE FROM YOUR SLEEVE! 🃏");
         System.out.println("The dealer didn't notice a thing... A magical Ace appears in your hand!");
 
-        Card cheatedAce = new Card("Ace", 11, Suit.SPADES);
+        Card cheatedAce = new Card("A", 11, Suit.SPADES);
         player.addCardToHand(cheatedAce);
 
         return true;

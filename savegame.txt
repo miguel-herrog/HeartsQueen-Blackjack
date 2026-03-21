@@ -1,0 +1,3 @@
+chips:50
+progress:2
+inventory:Aces High,Rabbit's Foot

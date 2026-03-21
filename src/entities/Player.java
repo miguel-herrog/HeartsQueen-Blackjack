@@ -44,18 +44,72 @@ public class Player {
     }
 
     public void showHand() {
-        System.out.println("--- " + name + "'s Hand ---");
+        System.out.println("\n--- " + name.toUpperCase() + "'s Hand ---");
+
+        StringBuilder line1 = new StringBuilder();
+        StringBuilder line2 = new StringBuilder();
+        StringBuilder line3 = new StringBuilder();
+        StringBuilder line4 = new StringBuilder();
+        StringBuilder line5 = new StringBuilder();
+
         for (Card c : hand) {
-            System.out.println("- " + c);
+            String r = c.getShortRank();
+            String s = c.getSuitSymbol();
+
+            // Ajuste de espaciado por si es un "10" (ocupa 2 caracteres)
+            String topRank = r.length() == 1 ? r + " " : r;
+            String botRank = r.length() == 1 ? " " + r : r;
+
+            line1.append("┌───────┐ ");
+            line2.append("│ ").append(topRank).append("    │ ");
+            line3.append("│   ").append(s).append("   │ ");
+            line4.append("│    ").append(botRank).append(" │ ");
+            line5.append("└───────┘ ");
         }
+
+        System.out.println(line1);
+        System.out.println(line2);
+        System.out.println(line3);
+        System.out.println(line4);
+        System.out.println(line5);
         System.out.println("Current Score: " + calculateScore());
         System.out.println("-------------------");
     }
 
     public void showFirstCard() {
-        System.out.println("--- " + name + "'s Hand ---");
-        System.out.println("- " + hand.get(0));
-        System.out.println("- [\uD83C\uDCA0 Hidden Card]");
+        System.out.println("\n--- " + name.toUpperCase() + "'s Hand ---");
+
+        StringBuilder line1 = new StringBuilder();
+        StringBuilder line2 = new StringBuilder();
+        StringBuilder line3 = new StringBuilder();
+        StringBuilder line4 = new StringBuilder();
+        StringBuilder line5 = new StringBuilder();
+
+        // 1. Dibujamos la primera carta (Visible)
+        Card firstCard = hand.get(0);
+        String r = firstCard.getShortRank();
+        String s = firstCard.getSuitSymbol();
+        String topRank = r.length() == 1 ? r + " " : r;
+        String botRank = r.length() == 1 ? " " + r : r;
+
+        line1.append("┌───────┐ ");
+        line2.append("│ ").append(topRank).append("    │ ");
+        line3.append("│   ").append(s).append("   │ ");
+        line4.append("│    ").append(botRank).append(" │ ");
+        line5.append("└───────┘ ");
+
+        // 2. Dibujamos la segunda carta (Oculta)
+        line1.append("┌───────┐ ");
+        line2.append("│ ░░░░░ │ ");
+        line3.append("│ ░ ? ░ │ ");
+        line4.append("│ ░░░░░ │ ");
+        line5.append("└───────┘ ");
+
+        System.out.println(line1);
+        System.out.println(line2);
+        System.out.println(line3);
+        System.out.println(line4);
+        System.out.println(line5);
         System.out.println("-------------------");
     }
 
@@ -67,6 +121,10 @@ public class Player {
         this.chips += amount;
     }
 
+    public void setChips(int chips) {
+        this.chips = chips;
+    }
+
     public void clearHand() {
         this.hand.clear();
     }
@@ -76,6 +134,10 @@ public class Player {
     }
 
     public void playTurn(Deck deck) {
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 
     public boolean consumeItem(String itemName) {
