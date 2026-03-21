@@ -1,30 +1,33 @@
-# 🃏 Heart's entities.Queen: Blackjack in Wonderland (v3.0 - The Tower)
+# 🃏 Heart's Queen: Blackjack in Wonderland
 
-A text-based, interactive console RPG game built purely in Java. Climb the Wonderland Tower by bankrupting a cast of iconic characters in high-stakes games of Blackjack, leading up to the final showdown with the entities.Queen of Hearts.
-
-![Hearts entities.Queen Gameplay Demo](assets/gameplay.png)
+A text-based, interactive console RPG built purely in Java. Climb the Wonderland Tower by bankrupting a cast of iconic characters in high-stakes games of Blackjack, buy powerful items at the merchant, and survive the final showdown with the Queen of Hearts.
 
 ## 🎯 Project Overview
-This project showcases the evolution from a simple console script into a structured, scalable application. It demonstrates a strong understanding of **Object-Oriented Programming (OOP)**, software architecture, and robust error handling in Java.
+This project showcases a complete Object-Oriented application, evolving from a simple game loop into a structured, scalable RPG architecture. It demonstrates advanced Java concepts including package management, inheritance, and robust error handling.
 
 ### ✨ Key Features
-* **The Boss Rush (Progression System):** Face three distinct opponents (The Mad Hatter, The Cheshire Cat, and The entities.Queen). You must bankrupt each boss to advance to the next floor.
-* **Unique AI Behaviors:** Each boss features custom logic and risk tolerance. The Hatter stands at 15, the entities.Queen at 17, and the Cat gambles until 18.
-* **Dedicated Game Engine:** A centralized `core.GameEngine` class dynamically handles the rules, pacing, and economy of any encounter regardless of the opponent.
-* **Bulletproof Input Handling:** The betting phase is protected against invalid user inputs (letters, empty spaces) using structured `try-catch` blocks, preventing application crashes.
-* **Dynamic Ace Logic:** Aces automatically adjust their value (11 or 1) to optimize the hand score.
+* **The Boss Rush:** Face three distinct opponents (The Mad Hatter, The Cheshire Cat, and The Queen) with unique AI risk logic. Bankrupt them to advance!
+* **Dynamic Economy & The Shop:** Earn chips by winning hands and spend them at the Mysterious Merchant's shop between floors.
+* **Interactive Combat Inventory:** Access your backpack mid-game to turn the tides of the match.
+* **Active & Passive Items:**
+    * *Mad Tea (Active):* Drink it during your turn for an instant chip boost.
+    * *Rabbit's Foot (Passive):* Automatically triggers to save you from a fatal bust (going over 21).
+* **Bulletproof Inputs:** Comprehensive `try-catch` blocks protect the game engine from crashing against invalid user inputs.
 
 ## 🛠️ Tech Stack & Architecture
 * **Language:** Java
+* **Package Structure:** Organized for enterprise-level scalability:
+    * `core/`: Game loop (`Main`) and rule arbitration (`GameEngine`).
+    * `entities/`: Player and AI Bosses (`Player`, `MadHatter`, `Queen`, etc.).
+    * `items/`: Shop logic, Inventory management, and the `Item` inheritance tree.
+    * `mechanics/`: Core physical elements (`Card`, `Deck`).
 * **OOP Principles Applied:**
-  * **Inheritance & Polymorphism:** Opponents are subclasses of a base `entities.Player` class, overriding the `playTurn()` method to inject their unique logic while being processed identically by the `core.GameEngine`.
-  * **Single Responsibility Principle (SRP):** Complete separation of concerns between game execution (`core.Main`), rule arbitration (`core.GameEngine`), and state management (`entities.Player`).
-  * **Encapsulation:** Protected chip balances and isolated deck management.
-* **Error Handling:** Implementation of `NumberFormatException` catching to sanitize standard input streams.
+    * **Inheritance & Polymorphism:** Items and Bosses inherit from abstract/base classes, overriding methods to inject unique mechanics (`applyEffect()`, `playTurn()`) without bloating the main engine.
+    * **Single Responsibility Principle (SRP):** Strict separation between UI prompts, game rules, and entity state management.
 
 ## 🚀 How to Play
-1. Compile the Java files located in the `src` directory.
-2. Run the `core.Main` class.
-3. You start with 100 chips. Your goal is to drain the chips of the boss in front of you.
-4. Place your bet, then type `H` to Hit or `S` to Stand.
-5. Defeat the Mad Hatter, survive the Cheshire Cat, and bankrupt the entities.Queen of Hearts to escape Wonderland!
+1. Clone the repository and open it in your preferred IDE (e.g., IntelliJ IDEA).
+2. Ensure your IDE recognizes the `src` directory as the project's Source Root.
+3. Run the `Main.java` file located inside the `core` package.
+4. You start with 100 chips. Place your bets, choose to (H)it, (S)tand, or open your (I)nventory.
+5. Buy upgrades, outsmart the AI, and escape Wonderland!
