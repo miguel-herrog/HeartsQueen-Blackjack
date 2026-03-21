@@ -1,3 +1,6 @@
+package core;
+import entities.Player;
+import mechanics.Deck;
 import java.util.Scanner;
 
 public class GameEngine {
@@ -65,29 +68,47 @@ public class GameEngine {
             boss.showFirstCard();
 
             // --- ALICE'S TURN ---
+            boolean usedRabbit = false;
             boolean isPlayerTurn = true;
             while (isPlayerTurn && player.calculateScore() < 21) {
-                System.out.println("Do you want to (H)it or (S)tand?");
+                System.out.println("Do you want to (H)it, (S)tand or open (I)nventory?");
                 String choice = scanner.nextLine().toUpperCase();
 
-                if (choice.equals("H")) {
-                    System.out.println(player.getName() + " draws a card from the deck...");
-                    player.addCardToHand(deck.drawCard());
-                    player.showHand();
-                } else if (choice.equals("S")) {
-                    System.out.println(player.getName() + " decides to stand her ground.");
-                    isPlayerTurn = false;
-                } else {
-                    System.out.println("Invalid choice! Type H or S!");
+                switch (choice) {
+                    case "H" -> {
+                        System.out.println(player.getName() + " draws a card from the deck...");
+                        player.addCardToHand(deck.drawCard());
+                        player.showHand();
+                    }
+                    case "S" -> {
+                        System.out.println(player.getName() + " decides to stand her ground.");
+                        isPlayerTurn = false;
+                    }
+                    case "I" -> {
+                        System.out.println(player.getName() + " decides to see her inventory.");
+                        player.openInventory(scanner);
+
+                        System.out.println("\n--- BACK TO THE TABLE ---");
+                        System.out.println(player.getName() + "'s score is: " + player.calculateScore());
+                    }
+                    default -> System.out.println("Invalid choice! Type H, S or I!");
                 }
+
             }
 
             // Check if Alice lost her head before the boss even plays
             if (player.calculateScore() > 21) {
-                System.out.println("BUST! You went over 21. " + boss.getName() + " laughs as you lose your chips!");
-                player.adjustChips(-bet);
-                pause(2000);
-                continue;
+                if (player.consumeItem("Rabbit's Foot")) {
+                    System.out.println("\n✨ THE RABBIT'S FOOT GLOWS! ✨");
+                    System.out.println("It crumbles to dust, but it saves you from busting!");
+                    System.out.println("Your score is magically locked at 21. Your turn ends.");
+                    usedRabbit = true;
+                } else {
+                    System.out.println("BUST! You went over 21. " + boss.getName() + " laughs as you lose your chips!");
+                    player.adjustChips(-bet);
+                    pause(2000);
+                    continue; // Skip the boss's turn and jump to the next round immediately
+                }
             }
             pause(2000);
 
@@ -96,6 +117,9 @@ public class GameEngine {
 
             // --- THE VERDICT ---
             int playerScore = player.calculateScore();
+            if (usedRabbit) {
+                playerScore = 21;
+            }
             int bossScore = boss.calculateScore();
 
             System.out.println("\n*** FINAL RESULTS ***");

@@ -1,4 +1,5 @@
-// Archivo: Card.java
+package mechanics;
+
 public class Card {
     private String rank; // Ej: "2", "10", "J", "Q", "K", "A"
     private int value;   // Ej: 2, 10, 10, 10, 10, 11

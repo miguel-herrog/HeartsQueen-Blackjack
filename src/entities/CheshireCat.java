@@ -1,3 +1,7 @@
+package entities;
+import core.GameEngine;
+import mechanics.Deck;
+
 public class CheshireCat extends Player {
     public CheshireCat() {
         super ("The Cheshire Cat");

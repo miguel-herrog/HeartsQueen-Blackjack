@@ -1,4 +1,4 @@
-// Archivo: Deck.java
+package mechanics;
 import java.util.ArrayList;
 import java.util.Collections;
 

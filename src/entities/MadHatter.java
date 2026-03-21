@@ -1,3 +1,7 @@
+package entities;
+import core.GameEngine;
+import mechanics.Deck;
+
 public class MadHatter extends Player {
     public MadHatter() {
         super ("The Mad Hatter");

@@ -1,6 +1,10 @@
+package entities;
+import core.GameEngine;
+import mechanics.Deck;
+
 public class Queen extends Player {
     public Queen() {
-        super ("The Queen of Hearts");
+        super ("The entities.Queen of Hearts");
     }
 
     public void playTurn(Deck deck) {
@@ -10,7 +14,7 @@ public class Queen extends Player {
 
         while (this.calculateScore() < 17) {
             GameEngine.pause(1500);
-            System.out.println("The Queen slams the table! 'Give me another card!'");
+            System.out.println("The entities.Queen slams the table! 'Give me another card!'");
             GameEngine.pause(1000);
             this.addCardToHand(deck.drawCard());
             this.showHand();
