@@ -1,33 +1,27 @@
-# 🃏 Heart's Queen: Blackjack in Wonderland
+# 🃏 Wonderland: A Game of Life, Death, and Chips
 
-A text-based, interactive console RPG built purely in Java. Climb the Wonderland Tower by bankrupting a cast of iconic characters in high-stakes games of Blackjack, buy powerful items at the merchant, and survive the final showdown with the Queen of Hearts.
+A terminal-based roguelike card game built entirely in Java. Face off against iconic denizens of Wonderland in a high-stakes, Blackjack-style combat system where your chips are your life.
 
-## 🎯 Project Overview
-This project showcases a complete Object-Oriented application, evolving from a simple game loop into a structured, scalable RPG architecture. It demonstrates advanced Java concepts including package management, inheritance, and robust error handling.
+## ✨ Features
 
-### ✨ Key Features
-* **The Boss Rush:** Face three distinct opponents (The Mad Hatter, The Cheshire Cat, and The Queen) with unique AI risk logic. Bankrupt them to advance!
-* **Dynamic Economy & The Shop:** Earn chips by winning hands and spend them at the Mysterious Merchant's shop between floors.
-* **Interactive Combat Inventory:** Access your backpack mid-game to turn the tides of the match.
-* **Active & Passive Items:**
-    * *Mad Tea (Active):* Drink it during your turn for an instant chip boost.
-    * *Rabbit's Foot (Passive):* Automatically triggers to save you from a fatal bust (going over 21).
-* **Bulletproof Inputs:** Comprehensive `try-catch` blocks protect the game engine from crashing against invalid user inputs.
-
-## 🛠️ Tech Stack & Architecture
-* **Language:** Java
-* **Package Structure:** Organized for enterprise-level scalability:
-    * `core/`: Game loop (`Main`) and rule arbitration (`GameEngine`).
-    * `entities/`: Player and AI Bosses (`Player`, `MadHatter`, `Queen`, etc.).
-    * `items/`: Shop logic, Inventory management, and the `Item` inheritance tree.
-    * `mechanics/`: Core physical elements (`Card`, `Deck`).
-* **OOP Principles Applied:**
-    * **Inheritance & Polymorphism:** Items and Bosses inherit from abstract/base classes, overriding methods to inject unique mechanics (`applyEffect()`, `playTurn()`) without bloating the main engine.
-    * **Single Responsibility Principle (SRP):** Strict separation between UI prompts, game rules, and entity state management.
+* **Strategic Card Combat:** Push your luck against bosses like the Mad Hatter, the Cheshire Cat, and the Queen of Hearts.
+* **Item Shop & Inventory:** Buy magical items (like *Mad Tea* or a *Rabbit's Foot*) to manipulate the rules of the game in your favor.
+* **Persistent Save System:** Built from scratch using a custom Key-Value parser to save your chips, inventory, and floor progress seamlessly.
+* **Permadeath Mechanic:** High stakes. If you go bankrupt, your save file is automatically wiped.
+* **Factory Pattern Architecture:** Clean, modular code using an `ItemRegistry` to handle object creation dynamically.
 
 ## 🚀 How to Play
-1. Clone the repository and open it in your preferred IDE (e.g., IntelliJ IDEA).
-2. Ensure your IDE recognizes the `src` directory as the project's Source Root.
-3. Run the `Main.java` file located inside the `core` package.
-4. You start with 100 chips. Place your bets, choose to (H)it, (S)tand, or open your (I)nventory.
-5. Buy upgrades, outsmart the AI, and escape Wonderland!
+
+1. Make sure you have **Java (JRE)** installed on your system.
+2. Download the `HeartsQueen.jar` and `run.bat` files.
+3. Simply double-click `run.bat` (on Windows) to launch the game with the optimal terminal settings.
+   *(Alternatively, run `java -jar HeartsQueen.jar` in your terminal).*
+
+## 🛠️ Technical Details
+
+* **Language:** Java 21 (or your specific version)
+* **Paradigm:** Object-Oriented Programming (OOP)
+* **Key Concepts Applied:** File I/O (`FileWriter`, `Scanner`), HashMap Registries, Error Handling, and scalable Game Loops.
+
+---
+*Created by Miguel.*
