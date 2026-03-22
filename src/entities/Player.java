@@ -1,4 +1,5 @@
 package entities;
+import core.DisplayManager;
 import items.Item;
 import mechanics.Card;
 import mechanics.Deck;
@@ -44,7 +45,7 @@ public class Player {
     }
 
     public void showHand() {
-        System.out.println("\n--- " + name.toUpperCase() + "'s Hand ---");
+        DisplayManager.type("\n--- " + name.toUpperCase() + "'s Hand ---", 10);
 
         StringBuilder line1 = new StringBuilder();
         StringBuilder line2 = new StringBuilder();
@@ -72,12 +73,12 @@ public class Player {
         System.out.println(line3);
         System.out.println(line4);
         System.out.println(line5);
-        System.out.println("Current Score: " + calculateScore());
+        DisplayManager.type("Current Score: " + calculateScore(), 10);
         System.out.println("-------------------");
     }
 
     public void showFirstCard() {
-        System.out.println("\n--- " + name.toUpperCase() + "'s Hand ---");
+        DisplayManager.type("\n--- " + name.toUpperCase() + "'s Hand ---", 10);
 
         StringBuilder line1 = new StringBuilder();
         StringBuilder line2 = new StringBuilder();
@@ -152,13 +153,13 @@ public class Player {
     }
 
     public void openInventory(Scanner scanner) {
-        System.out.println("\n🎒 ALICE'S INVENTORY 🎒");
+        DisplayManager.type("\n ALICE'S INVENTORY ", 10);
 
         boolean inInventory = true;
         while (inInventory) {
             System.out.println("-------------------------------------");
             if (inventory.isEmpty()) {
-                System.out.println("Your inventory is empty.");
+                DisplayManager.type("Your inventory is empty.", 10);
             } else {
                 for (int i = 0; i < inventory.size(); i++) {
                     Item item = inventory.get(i);
@@ -166,10 +167,10 @@ public class Player {
                     System.out.println("   * " + item.getDescription());
                 }
             }
-            System.out.println("0. Leave inventory");
+            DisplayManager.type("0. Leave inventory", 5);
             System.out.println("-------------------------------------");
 
-            System.out.println("What would you like to use? (Enter number):");
+            DisplayManager.type("What would you like to use? (Enter number):", 10);
 
             int choice = -1;
             boolean validChoice = false;
@@ -179,24 +180,24 @@ public class Player {
                     choice = Integer.parseInt(input);
 
                     if (choice > inventory.size() || choice < 0) {
-                        System.out.println("Not so fast, Alice! Pick a valid number.");
+                        DisplayManager.type("Not so fast, Alice! Pick a valid number.", 10);
                     } else {
                         validChoice = true;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("That's not even a number, Alice");
-                    System.out.println("Please, enter a valid number:");
+                    DisplayManager.type("That's not even a number, Alice", 10);
+                    DisplayManager.type("Please, enter a valid number:", 10);
                 }
             }
             if (choice == 0) {
-                System.out.println("Closing inventory...");
+                DisplayManager.type("Closing inventory...", 10);
                 inInventory = false;
             } else {
                 Item selectedItem = inventory.get(choice - 1);
 
                 if (selectedItem.isPassive()) {
-                    System.out.println("\n You can't use the " + selectedItem.getName() + " right now.");
-                    System.out.println("This is a PASSIVE item. It will activate automatically when you need it!");
+                    DisplayManager.type("\n You can't use the " + selectedItem.getName() + " right now.", 5);
+                    DisplayManager.type("This is a PASSIVE item. It will activate automatically when you need it!", 5);
                 } else {
                     consumeItem(selectedItem.getName());
                 }

@@ -1,4 +1,5 @@
 package entities;
+import core.DisplayManager;
 import core.GameEngine;
 import mechanics.Deck;
 
@@ -8,17 +9,17 @@ public class CheshireCat extends Player {
     }
 
     public void playTurn(Deck deck) {
-        System.out.println("\n--- THE CHESHIRE CAT'S TURN ---");
-        GameEngine.pause(1000);
+        DisplayManager.type("\n--- THE CHESHIRE CAT'S TURN ---", 10);
+        DisplayManager.pause(1000);
         this.showHand();
 
         while (this.calculateScore() < 18) {
-            GameEngine.pause(1500);
-            System.out.println("A wide grin appears in the dark... The Cat draws a card.");
-            GameEngine.pause(1000);
+            DisplayManager.pause(1500);
+            DisplayManager.type("A wide grin appears in the dark... The Cat draws a card.", 10);
+            DisplayManager.pause(1000);
             this.addCardToHand(deck.drawCard());
             this.showHand();
         }
-        GameEngine.pause(2000);
+        DisplayManager.pause(2000);
     }
 }

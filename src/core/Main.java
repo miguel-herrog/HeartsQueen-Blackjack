@@ -11,41 +11,46 @@ public class Main {
         Scanner mainScanner = new Scanner(System.in);
         Player alice = new Player("Alice");
 
+        System.out.println(core.ArtManager.getArt("BlackJack In Wonderlands"));
+
         core.SaveManager saveManager = new core.SaveManager();
         int currentFloor = saveManager.loadGame(alice);
 
         GameEngine engine = new GameEngine();
         Shop merchant = new Shop();
 
-        System.out.println("Welcome to Wonderland! A game of life, death, and chips.");
+        DisplayManager.type("Welcome to Wonderland! A game of life, death, and chips.", 50);
+        DisplayManager.pause(1000);
 
         // --- Floor 1: Mad Hatter ---
         if (currentFloor <= 1) {
             if (!engine.startEncounter(alice, new MadHatter())) return;
+            events.EventManager.rollForEvent(alice);
             merchant.visitShop(alice, mainScanner, 2);
         }
 
         // --- Floor 2: Cheshire Cat ---
         if (currentFloor <= 2) {
-            System.out.println("\n--- YOU ENTER THE DARK FOREST ---");
+            DisplayManager.type("\n--- YOU ENTER THE DARK FOREST ---", 50);
             if (!engine.startEncounter(alice, new CheshireCat())) return;
+            events.EventManager.rollForEvent(alice);
             merchant.visitShop(alice, mainScanner, 3);
         }
 
         // --- Floor 3: The Queen ---
         if (currentFloor <= 3) {
-            System.out.println("\n--- YOU ENTER THE ROYALE PALACE ---");
+            DisplayManager.type("\n--- YOU ENTER THE ROYALE PALACE ---", 50);
             if (engine.startEncounter(alice, new Queen())) {
                 System.out.println("\n===============================================");
-                System.out.println("👑 YOU BANKRUPTED THE QUEEN! YOU ESCAPED WONDERLAND! 👑");
-                System.out.println("Final Chips: " + alice.getChips());
+                DisplayManager.type("YOU BANKRUPTED THE QUEEN! YOU ESCAPED WONDERLAND!");
+                DisplayManager.type("Final Chips: " + alice.getChips());
                 System.out.println("===============================================");
 
                 saveManager.deleteSave();
             }
         }
 
-        System.out.println("\nThanks for playing!");
+        DisplayManager.type("\nThanks for playing!", 50);
         mainScanner.close();
     }
 }

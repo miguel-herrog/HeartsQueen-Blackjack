@@ -1,4 +1,5 @@
 package entities;
+import core.DisplayManager;
 import core.GameEngine;
 import mechanics.Deck;
 
@@ -8,17 +9,17 @@ public class MadHatter extends Player {
     }
 
     public void playTurn(Deck deck) {
-        System.out.println("\n--- THE MAD HATTER'S TURN ---");
-        GameEngine.pause(1000);
+        DisplayManager.type("\n--- THE MAD HATTER'S TURN ---", 10);
+        DisplayManager.pause(1000);
         this.showHand();
 
         while (this.calculateScore() < 15) {
-            GameEngine.pause(1500);
-            System.out.println("The Hatter nervously pours some tea and draws a card...");
-            GameEngine.pause(1000);
+            DisplayManager.pause(1500);
+            DisplayManager.type("The Hatter nervously pours some tea and draws a card...", 10);
+            DisplayManager.pause(1000);
             this.addCardToHand(deck.drawCard());
             this.showHand();
         }
-        GameEngine.pause(2000);
+        DisplayManager.pause(2000);
     }
 }

@@ -1,4 +1,5 @@
 package items;
+import core.DisplayManager;
 import entities.Player;
 
 public class RabbitFootItem extends Item {
@@ -8,9 +9,9 @@ public class RabbitFootItem extends Item {
     }
 
     public boolean applyEffect(Player player) {
-        System.out.println("\n✨ THE RABBIT'S FOOT GLOWS! ✨");
-        System.out.println("It crumbles to dust, but it saves you from busting!");
-        System.out.println("Your score is magically locked at 21.");
+        DisplayManager.type("\n THE RABBIT'S FOOT GLOWS! ", 5);
+        DisplayManager.type("It crumbles to dust, but it saves you from busting!", 10);
+        DisplayManager.type("Your score is magically locked at 21.", 15);
         return true;
     }
 }

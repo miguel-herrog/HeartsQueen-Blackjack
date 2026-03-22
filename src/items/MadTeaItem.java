@@ -1,5 +1,6 @@
 package items;
 
+import core.DisplayManager;
 import entities.Player;
 
 public class MadTeaItem extends Item {
@@ -9,8 +10,8 @@ public class MadTeaItem extends Item {
     }
 
     public boolean applyEffect(Player player) {
-        System.out.println("\n☕ YOU DRINK THE MAD TEA! ☕");
-        System.out.println("You feel a rush of chaotic energy... and find 50 chips in your pocket!");
+        DisplayManager.type("\n YOU DRINK THE MAD TEA! ", 5);
+        DisplayManager.type("You feel a rush of chaotic energy... and find 50 chips in your pocket!", 10);
         player.adjustChips(50);
         return true;
     }

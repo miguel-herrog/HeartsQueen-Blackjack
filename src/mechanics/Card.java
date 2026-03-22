@@ -15,9 +15,6 @@ public class Card {
         return value;
     }
 
-    public Suit getSuit() {
-        return suit;
-    }
 
     public String getRank() {
         return rank;

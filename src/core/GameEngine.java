@@ -11,25 +11,17 @@ public class GameEngine {
         this.scanner = new Scanner(System.in);
     }
 
-    // Utility method to add pacing and suspense to the game flow
-    public static void pause(int miliseconds) {
-        try {
-            Thread.sleep(miliseconds);
-        } catch (InterruptedException e) {
-            System.out.println("Error pausing the game.");
-        }
-    }
-
     public boolean startEncounter(Player player, Player boss) {
 
-        System.out.println("\n*** A new challenger approaches: " + boss.getName() + "! ***");
+        DisplayManager.type("\n*** A new challenger approaches: " + boss.getName() + "! ***", 50);
+        System.out.println(core.ArtManager.getArt(boss.getName()));
 
         while (player.getChips() > 0 && boss.getChips() > 0) {
             System.out.println("\n=====================================");
-            System.out.println("--- NEW ROUND VS " + boss.getName().toUpperCase() + " ---");
-            System.out.println("Your current chips: " + player.getChips());
-            System.out.println(boss.getName() + "'s chips: " + boss.getChips());
-            System.out.println("How many chips do you dare to bet?");
+            DisplayManager.type("--- NEW ROUND VS " + boss.getName().toUpperCase() + " ---");
+            DisplayManager.type("Your current chips: " + player.getChips());
+            DisplayManager.type(boss.getName() + "'s chips: " + boss.getChips());
+            DisplayManager.type("How many chips do you dare to bet?");
 
             // --- THE BETTING PHASE ---
             int bet =  0;
@@ -41,14 +33,14 @@ public class GameEngine {
                     bet = Integer.parseInt(input);
 
                     if (bet > player.getChips() || bet <= 0) {
-                        System.out.println("Not so fast, Alice! You can't bet what you don't have.");
-                        System.out.println("You have " + player.getChips() + " chips. Try again:");
+                        DisplayManager.type("Not so fast, Alice! You can't bet what you don't have.");
+                        DisplayManager.type("You have " + player.getChips() + " chips. Try again:");
                     } else {
                         validBet = true;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println(boss.getName() + " laughs: 'That's not a number!'");
-                    System.out.println("Please, enter a valid number of chips to bet:");
+                    DisplayManager.type(boss.getName() + " laughs: 'That's not a number!'");
+                    DisplayManager.type("Please, enter a valid number of chips to bet:");
                 }
             }
 
@@ -72,27 +64,27 @@ public class GameEngine {
             boolean usedRabbit = false;
             boolean isPlayerTurn = true;
             while (isPlayerTurn && player.calculateScore() < 21) {
-                System.out.println("Do you want to (H)it, (S)tand or open (I)nventory?");
+                DisplayManager.type("Do you want to (H)it, (S)tand or open (I)nventory?");
                 String choice = scanner.nextLine().toUpperCase();
 
                 switch (choice) {
                     case "H" -> {
-                        System.out.println(player.getName() + " draws a card from the deck...");
+                        DisplayManager.type(player.getName() + " draws a card from the deck...");
                         player.addCardToHand(deck.drawCard());
                         player.showHand();
                     }
                     case "S" -> {
-                        System.out.println(player.getName() + " decides to stand her ground.");
+                        DisplayManager.type(player.getName() + " decides to stand her ground.");
                         isPlayerTurn = false;
                     }
                     case "I" -> {
-                        System.out.println(player.getName() + " decides to see her inventory.");
+                        DisplayManager.type(player.getName() + " decides to see her inventory.");
                         player.openInventory(scanner);
 
                         System.out.println("\n--- BACK TO THE TABLE ---");
-                        System.out.println(player.getName() + "'s score is: " + player.calculateScore());
+                        DisplayManager.type(player.getName() + "'s score is: " + player.calculateScore());
                     }
-                    default -> System.out.println("Invalid choice! Type H, S or I!");
+                    default -> DisplayManager.type("Invalid choice! Type H, S or I!");
                 }
 
             }
@@ -102,13 +94,13 @@ public class GameEngine {
                 if (player.consumeItem("Rabbit's Foot")) {
                     usedRabbit = true;
                 } else {
-                    System.out.println("BUST! You went over 21. " + boss.getName() + " laughs as you lose your chips!");
+                    DisplayManager.type("BUST! You went over 21. " + boss.getName() + " laughs as you lose your chips!");
                     player.adjustChips(-bet);
-                    pause(2000);
+                    DisplayManager.pause(2000);
                     continue; // Skip the boss's turn and jump to the next round immediately
                 }
             }
-            pause(2000);
+            DisplayManager.pause(2000);
 
             // --- THE BOSS'S TURN ---
             boss.playTurn(deck);
@@ -121,25 +113,25 @@ public class GameEngine {
             int bossScore = boss.calculateScore();
 
             System.out.println("\n*** FINAL RESULTS ***");
-            System.out.println(player.getName() + "'s Score: " + playerScore);
-            System.out.println(boss.getName() + "'s Score: " + bossScore);
+            DisplayManager.type(player.getName() + "'s Score: " + playerScore);
+            DisplayManager.type(boss.getName() + "'s Score: " + bossScore);
 
-            pause(1500);
+            DisplayManager.pause(1500);
 
             // Payout logic
             if (bossScore > 21) {
-                System.out.println(boss.getName() + " busts! YOU SURVIVE AND WIN THE BET!");
+                DisplayManager.type(boss.getName() + " busts! YOU SURVIVE AND WIN THE BET!");
                 player.adjustChips(bet);
                 boss.adjustChips(-bet);
             } else if (playerScore > bossScore) {
-                System.out.println("You beat " + boss.getName() + "'s score! YOU SURVIVE AND WIN THE BET!");
+                DisplayManager.type("You beat " + boss.getName() + "'s score! YOU SURVIVE AND WIN THE BET!");
                 player.adjustChips(bet);
                 boss.adjustChips(-bet);
             } else if (playerScore == bossScore) {
-                System.out.println("It's a tie! " + boss.getName() + " spares you... your chips are returned.");
+                DisplayManager.type("It's a tie! " + boss.getName() + " spares you... your chips are returned.");
                 // No chips are added or lost
             } else {
-                System.out.println(boss.getName() + " wins! You lose your bet!");
+                DisplayManager.type(boss.getName() + " wins! You lose your bet!");
                 player.adjustChips(-bet);
                 boss.adjustChips(bet);
             }
@@ -148,13 +140,13 @@ public class GameEngine {
         // --- END OF THE ENCOUNTER ---
         if (player.getChips() <= 0) {
             System.out.println("\n*** BANKRUPT ***");
-            System.out.println(boss.getName() + " took all your chips! The guards drag you away.");
+            DisplayManager.type(boss.getName() + " took all your chips! The guards drag you away.");
             saveManager.deleteSave();
             return false; // You Lost
 
         } else {
             System.out.println("\n*** VICTORY! ***");
-            System.out.println("You bankrupted " + boss.getName() + "! You advance to the next floor.");
+            DisplayManager.type("You bankrupted " + boss.getName() + "! You advance to the next floor.");
             return true; // You Won
         }
     }
