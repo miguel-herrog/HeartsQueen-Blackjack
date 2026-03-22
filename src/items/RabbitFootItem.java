@@ -9,9 +9,9 @@ public class RabbitFootItem extends Item {
     }
 
     public boolean applyEffect(Player player) {
-        DisplayManager.type("\n THE RABBIT'S FOOT GLOWS! ", 5);
-        DisplayManager.type("It crumbles to dust, but it saves you from busting!", 10);
-        DisplayManager.type("Your score is magically locked at 21.", 15);
+        DisplayManager.type("\n THE RABBIT'S FOOT GLOWS! ");
+        DisplayManager.type("It crumbles to dust, but it saves you from busting!");
+        DisplayManager.type("Your score is magically locked at 21.");
         return true;
     }
 }

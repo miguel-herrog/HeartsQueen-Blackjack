@@ -22,7 +22,7 @@ public class GenericEvent implements RandomEvent {
     public void trigger(Player player) {
         System.out.println("\n--- ? MYSTERIOUS EVENT: " + name.toUpperCase() + " ? ---");
 
-        DisplayManager.type(description, 40);
+        DisplayManager.type(description);
         DisplayManager.pause(1000);
 
         // Apply the effect

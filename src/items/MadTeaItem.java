@@ -10,8 +10,8 @@ public class MadTeaItem extends Item {
     }
 
     public boolean applyEffect(Player player) {
-        DisplayManager.type("\n YOU DRINK THE MAD TEA! ", 5);
-        DisplayManager.type("You feel a rush of chaotic energy... and find 50 chips in your pocket!", 10);
+        DisplayManager.type("\n YOU DRINK THE MAD TEA! ");
+        DisplayManager.type("You feel a rush of chaotic energy... and find 50 chips in your pocket!");
         player.adjustChips(50);
         return true;
     }

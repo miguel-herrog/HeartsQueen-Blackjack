@@ -22,7 +22,7 @@ public class SaveManager {
      * @param progress The current floor/boss index to save.
      */
     public void saveGame(Player player, int progress) {
-        DisplayManager.type("\nSaving game...", 10);
+        DisplayManager.type("\nSaving game...");
 
         // Using try-with-resources to ensure the FileWriter closes automatically
         try (FileWriter writer = new FileWriter(FILE_NAME)) {
@@ -40,9 +40,9 @@ public class SaveManager {
             }
             writer.write("\n");
 
-            DisplayManager.type("Progress saved successfully!", 10);
+            DisplayManager.type("Progress saved successfully!");
         } catch (IOException e) {
-            DisplayManager.type(" Error saving game: " + e.getMessage(), 10);
+            DisplayManager.type(" Error saving game: " + e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class SaveManager {
         // Return floor 1 immediately if it's a new game
         if (!file.exists()) return 1;
 
-        DisplayManager.type("Loading saved game...", 10);
+        DisplayManager.type("Loading saved game...");
         int currentProgress = 1;
 
         try (Scanner reader = new Scanner(file)) {
@@ -93,11 +93,11 @@ public class SaveManager {
                         }break;
                 }
             }
-            DisplayManager.type("Game loaded successfully!", 10);
+            DisplayManager.type("Game loaded successfully!");
             return currentProgress;
         }
         catch (Exception e) {
-            DisplayManager.type(" Error loading game: " + e.getMessage(), 10);
+            DisplayManager.type(" Error loading game: " + e.getMessage());
             return 1;
         }
     }
@@ -106,7 +106,7 @@ public class SaveManager {
         File file = new File(FILE_NAME);
         if (file.exists()) {
             file.delete();
-            DisplayManager.type("🗑 Save file cleared for a new adventure!", 10);
+            DisplayManager.type("🗑 Save file cleared for a new adventure!");
         }
     }
 }

@@ -9,13 +9,13 @@ public class Queen extends Player {
     }
 
     public void playTurn(Deck deck) {
-        DisplayManager.type("\n--- THE QUEEN OF HEARTS TURN ---", 10);
+        DisplayManager.type("\n--- THE QUEEN OF HEARTS TURN ---");
         DisplayManager.pause(1000);
         this.showHand();
 
         while (this.calculateScore() < 17) {
             DisplayManager.pause(1500);
-            DisplayManager.type("Queen slams the table! 'Give me another card!'", 10);
+            DisplayManager.type("Queen slams the table! 'Give me another card!'");
             DisplayManager.pause(1000);
             this.addCardToHand(deck.drawCard());
             this.showHand();

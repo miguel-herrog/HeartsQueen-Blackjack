@@ -13,7 +13,7 @@ public class GameEngine {
 
     public boolean startEncounter(Player player, Player boss) {
 
-        DisplayManager.type("\n*** A new challenger approaches: " + boss.getName() + "! ***", 50);
+        DisplayManager.type("\n*** A new challenger approaches: " + boss.getName() + "! ***");
         System.out.println(core.ArtManager.getArt(boss.getName()));
 
         while (player.getChips() > 0 && boss.getChips() > 0) {
