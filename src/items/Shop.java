@@ -3,6 +3,8 @@ import core.DisplayManager;
 import core.SaveManager;
 import entities.Player;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Shop {
@@ -11,9 +13,19 @@ public class Shop {
     public Shop() {
         this.catalog = new ArrayList<>();
 
-        catalog.add(new AcesHighItem());
-        catalog.add(new RabbitFootItem());
-        catalog.add(new MadTeaItem());
+        // 1. Get all possible item IDs from the registry
+        List<String> availableIds = ItemRegistry.getAllRegisteredIds();
+
+        // 2. Shuffle the list to make it random
+        Collections.shuffle(availableIds);
+
+        // 3. Pick the first 3 items (or less, if we have fewer than 3 registered)
+        int itemsToStock = Math.min(3, availableIds.size());
+
+        for (int i = 0; i < itemsToStock; i++) {
+            String randomId = availableIds.get(i);
+            catalog.add(ItemRegistry.createItem(randomId));
+        }
     }
 
     public void visitShop(Player player, Scanner scanner, int progress) {
