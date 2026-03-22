@@ -44,14 +44,14 @@ This project was built to be easily maintainable and highly scalable. Key archit
 
 ## 🚀 How to Play
 
-No IDE is required to play. The game is packaged as an executable `.jar` file.
+Wonderland is packaged as an executable and is ready to play. No IDE is required.
 
-1. Download the latest release folder containing:
-    * `HeartsQueen.jar` (The game engine)
-    * `events.txt` (The data-driven event database)
-    * `run.bat` (The Windows launcher)
-2. Ensure all three files are in the same directory.
-3. Double-click **`run.bat`** to start your journey into Wonderland.
+**[👉 Click here to download the latest game folder (v1.0.0)](https://github.com/miguel-herrog/HeartsQueen-Blackjack/releases/download/v1.0.0/wonderland-v1.0.0-windows.zip)**
+
+1. Download the `.zip` file from the link above.
+2. Extract the contents to any folder on your computer.
+3. Ensure all three files (`Wonderland.jar`, `events.txt`, and `run.bat`) are in the same directory.
+4. Double-click **`run.bat`** to start your journey into Wonderland.
 
 ---
 
