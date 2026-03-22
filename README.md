@@ -23,16 +23,22 @@ This project was built to be easily maintainable and highly scalable. Key archit
 
 ## 📸 Screenshots
 
-*(Add your screenshots here! Take a picture of the Mad Hatter ASCII art, the typewriter text, and the shop menu)*
+<p align="center">
+  <figure style="display: inline-block; text-align: center; margin: 20px;">
+    <img src="assets/start.png" alt="Mad Hatter Encounter" width="500" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
+    <figcaption style="margin-top: 10px; font-style: italic; color: #555;">Entering Floor 1: The Mad Hatter encounter.</figcaption>
+  </figure>
 
-![Gameplay Screenshot 1](assets/start.png)
-*Entering Floor 1: The Mad Hatter encounter.*
+  <br> <figure style="display: inline-block; text-align: center; margin: 20px;">
+    <img src="assets/gameplay.png" alt="Dynamic Shop" width="500" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
+    <figcaption style="margin-top: 10px; font-style: italic; color: #555;">Battle gameplay.</figcaption>
+  </figure>
 
-![Gameplay Screenshot 2](assets/gameplay.png)
-*Battle gameplay.*
-
-![Gameplay Screenshot 2](assets/shop.png)
-*The Dynamic Shop system generating random items.*
+  <br> <figure style="display: inline-block; text-align: center; margin: 20px;">
+    <img src="assets/shop.png" alt="Dynamic Shop" width="500" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
+    <figcaption style="margin-top: 10px; font-style: italic; color: #555;">The Dynamic Shop system generating random items.</figcaption>
+  </figure>
+</p>
 
 ---
 
