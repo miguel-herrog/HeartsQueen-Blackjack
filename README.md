@@ -25,10 +25,13 @@ This project was built to be easily maintainable and highly scalable. Key archit
 
 *(Add your screenshots here! Take a picture of the Mad Hatter ASCII art, the typewriter text, and the shop menu)*
 
-![Gameplay Screenshot 1](link_to_your_image_here.png)
+![Gameplay Screenshot 1](assets/start.png)
 *Entering Floor 1: The Mad Hatter encounter.*
 
-![Gameplay Screenshot 2](link_to_your_image_here.png)
+![Gameplay Screenshot 2](assets/gameplay.png)
+*Battle gameplay.*
+
+![Gameplay Screenshot 2](assets/shop.png)
 *The Dynamic Shop system generating random items.*
 
 ---
@@ -48,11 +51,12 @@ No IDE is required to play. The game is packaged as an executable `.jar` file.
 
 ## 🗺️ Roadmap & Next Steps
 
-This project is continuously evolving. Upcoming technical milestones include:
+This project is continuously evolving. Upcoming milestones focus on expanding the game's universe and ensuring stability:
 
-- [ ] **Unit Testing:** Implement `JUnit` tests to verify the `ItemRegistry` and Shop logic.
-- [ ] **Database Integration:** Migrate the `.txt` save file system to a lightweight `SQLite` database.
-- [ ] **Advanced Error Handling:** Implement custom Exception classes for corrupted save files.
+- [ ] **Rich Narrative Integration:** Expand the game's lore with a deeper contextual storyline, intro sequences, and character dialogue to fully immerse the player in Wonderland.
+- [ ] **Content Expansion:** Significantly scale the game's universe by adding new unique enemies, challenging bosses, and a wider variety of custom items to the `ItemRegistry`.
+- [ ] **Advanced Data-Driven Events:** Leverage the newly created `events.txt` system to introduce dozens of new dynamic encounters, hidden traps, and branching scenarios.
+- [ ] **Unit Testing & Reliability:** Implement `JUnit` tests to verify the core engine, `ItemRegistry`, and Shop logic to prevent bugs as the content grows.
 
 ---
 *Developed by Miguel.*
