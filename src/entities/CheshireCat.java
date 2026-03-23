@@ -19,9 +19,9 @@ public class CheshireCat extends Boss {
         DisplayManager.pause(1000);
         DisplayManager.type("\n--- THE CAT'S ENIGMATIC TURN ---", 20);
 
-        int targetToBeat = opponent.calculateScore();
+        int standLimit = 14 + random.nextInt(5);
 
-        while (calculateScore() <= standLimit) {
+        while (calculateScore() < standLimit) {
             DisplayManager.pause(1000);
 
             if (random.nextBoolean()) {

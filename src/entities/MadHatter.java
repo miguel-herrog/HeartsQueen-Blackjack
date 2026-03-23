@@ -14,9 +14,9 @@ public class MadHatter extends Boss {
         DisplayManager.pause(1000);
         DisplayManager.type("\n--- THE HATTER'S CHAOTIC TURN ---", 20);
 
-        int targetToBeat = opponent.calculateScore();
 
-        while (calculateScore() <= targetToBeat) {
+
+        while (calculateScore() <= 17) {
             DisplayManager.pause(1000);
             DisplayManager.type("Mad Hatter: \"More tea! MORE CARDS!\"", 30);
 
