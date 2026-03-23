@@ -30,6 +30,10 @@ public class Player {
         return name;
     }
 
+    public int getHandSize() {
+        return hand.size();
+    }
+
     public void addCardToHand(Card card) {
         hand.add(card);
     }
@@ -49,6 +53,34 @@ public class Player {
             aces -= 1;
         }
         return score;
+    }
+
+    /**
+     * Returns a string representing the score for display purposes.
+     * If there is an active Ace (counted as 11), it shows "Hard / Soft" (e.g., "7 / 17").
+     * Otherwise, it just returns the normal score.
+     */
+    public String getScoreDisplay() {
+        int score = 0, aces = 0;
+
+        for (Card h : hand){
+            score += h.getValue();
+            if (h.getRank().equals("A")){
+                aces += 1;
+            }
+        }
+
+        while (score > 21 && aces > 0){
+            score -= 10;
+            aces -= 1;
+        }
+
+        if (aces > 0 && score <= 21) {
+            int hardScore = score - 10;
+            return hardScore + " / " + score;
+        } else {
+            return String.valueOf(score);
+        }
     }
 
     public void showHand() {
@@ -80,7 +112,7 @@ public class Player {
         System.out.println(line3);
         System.out.println(line4);
         System.out.println(line5);
-        DisplayManager.type("Current Score: " + calculateScore(), 10);
+        DisplayManager.type("Current Score: " + getScoreDisplay(), 10);
         System.out.println("-------------------");
     }
 
@@ -144,6 +176,10 @@ public class Player {
     public void playTurn(Deck deck) {
     }
 
+    public boolean hasBlackjack() {
+        return hand.size() == 2 && calculateScore() == 21;
+    }
+
     public ArrayList<Item> getInventory() {
         return inventory;
     }
@@ -165,16 +201,44 @@ public class Player {
         boolean inInventory = true;
         while (inInventory) {
             System.out.println("-------------------------------------");
+
+            java.util.ArrayList<Item> passiveItems = new java.util.ArrayList<>();
+            java.util.ArrayList<Item> activeItems = new java.util.ArrayList<>();
+
+            for (Item item : inventory) {
+                if (item.isPassive()) {
+                    passiveItems.add(item);
+                } else {
+                    activeItems.add(item);
+                }
+            }
+
             if (inventory.isEmpty()) {
                 DisplayManager.type("Your inventory is empty.", 10);
             } else {
-                for (int i = 0; i < inventory.size(); i++) {
-                    Item item = inventory.get(i);
-                    System.out.println((i + 1) + ". " + item.getName());
-                    System.out.println("   * " + item.getDescription());
+                DisplayManager.type("--- Passive Items ---", 10);
+                if (passiveItems.isEmpty()) {
+                    System.out.println("  (None)");
+                } else {
+                    for (Item item : passiveItems) {
+                        System.out.println(" · " + item.getName());
+                        System.out.println("   * " + item.getDescription());
+                    }
+                }
+
+                DisplayManager.type("\n--- Active Items ---", 10);
+                if (activeItems.isEmpty()) {
+                    System.out.println("  (None)");
+                } else {
+                    for (int i = 0; i < activeItems.size(); i++) {
+                        Item item = activeItems.get(i);
+                        System.out.println((i + 1) + ". " + item.getName());
+                        System.out.println("   * " + item.getDescription());
+                    }
                 }
             }
-            DisplayManager.type("0. Leave inventory", 5);
+
+            DisplayManager.type("\n0. Leave inventory", 5);
             System.out.println("-------------------------------------");
 
             DisplayManager.type("What would you like to use? (Enter number):", 10);
@@ -186,7 +250,7 @@ public class Player {
                     String input = scanner.nextLine();
                     choice = Integer.parseInt(input);
 
-                    if (choice > inventory.size() || choice < 0) {
+                    if (choice > activeItems.size() || choice < 0) {
                         DisplayManager.type("Not so fast, Alice! Pick a valid number.", 10);
                     } else {
                         validChoice = true;
@@ -196,19 +260,15 @@ public class Player {
                     DisplayManager.type("Please, enter a valid number:", 10);
                 }
             }
+
             if (choice == 0) {
                 DisplayManager.type("Closing inventory...", 10);
                 inInventory = false;
             } else {
-                Item selectedItem = inventory.get(choice - 1);
-
-                if (selectedItem.isPassive()) {
-                    DisplayManager.type("\n You can't use the " + selectedItem.getName() + " right now.", 5);
-                    DisplayManager.type("This is a PASSIVE item. It will activate automatically when you need it!", 5);
-                } else {
-                    consumeItem(selectedItem.getName());
-                }
+                Item selectedItem = activeItems.get(choice - 1);
+                consumeItem(selectedItem.getName());
             }
         }
+        showHand();
     }
 }

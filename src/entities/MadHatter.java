@@ -10,11 +10,13 @@ public class MadHatter extends Boss {
     }
 
     @Override
-    public void playTurn(Deck deck) {
+    public void playTurn(Deck deck, Player opponent) {
         DisplayManager.pause(1000);
         DisplayManager.type("\n--- THE HATTER'S CHAOTIC TURN ---", 20);
 
-        while (calculateScore() < 15) {
+        int targetToBeat = opponent.calculateScore();
+
+        while (calculateScore() <= targetToBeat) {
             DisplayManager.pause(1000);
             DisplayManager.type("Mad Hatter: \"More tea! MORE CARDS!\"", 30);
 

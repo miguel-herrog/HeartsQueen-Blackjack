@@ -14,8 +14,8 @@ public abstract class Boss extends Player {
      * Override playTurn: The boss doesn't use a Scanner.
      * It plays automatically using basic Casino Dealer AI (hits until 17).
      */
-    @Override
-    public void playTurn(Deck deck) {
+
+    public void playTurn(Deck deck, Player opponent) {
         DisplayManager.pause(1000);
         DisplayManager.type("\n--- " + getName().toUpperCase() + " PLAYS ---", 20);
 

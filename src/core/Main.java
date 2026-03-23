@@ -6,12 +6,26 @@ import entities.Queen;
 import items.Shop;
 import java.util.Scanner;
 
+import static core.DisplayManager.clearInputBuffer;
+
 public class Main {
     public static void main(String[] args) {
         Scanner mainScanner = new Scanner(System.in);
         Player alice = new Player("Alice");
 
         System.out.println(core.ArtManager.getArt("BlackJack In Wonderlands"));
+
+        System.out.println("\nDo you want to enable FAST MODE? (Skips typewriter text delays)");
+        System.out.println("Type 'Y' for Yes, or 'N' for No (Normal Experience):");
+
+        clearInputBuffer();
+        String fastChoice = mainScanner.nextLine().toUpperCase();
+        if (fastChoice.equals("Y") || fastChoice.equals("YES")) {
+            DisplayManager.fastMode = true;
+            System.out.println("[ Fast Mode ENABLED ]\n");
+        } else {
+            System.out.println("[ Normal Mode ENABLED ]\n");
+        }
 
         core.SaveManager saveManager = new core.SaveManager();
         int currentFloor = saveManager.loadGame(alice);

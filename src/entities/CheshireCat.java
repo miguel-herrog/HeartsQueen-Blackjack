@@ -15,13 +15,13 @@ public class CheshireCat extends Boss {
     }
 
     @Override
-    public void playTurn(Deck deck) {
+    public void playTurn(Deck deck, Player opponent) {
         DisplayManager.pause(1000);
         DisplayManager.type("\n--- THE CAT'S ENIGMATIC TURN ---", 20);
 
-        int standLimit = 14 + random.nextInt(5);
+        int targetToBeat = opponent.calculateScore();
 
-        while (calculateScore() < standLimit) {
+        while (calculateScore() <= standLimit) {
             DisplayManager.pause(1000);
 
             if (random.nextBoolean()) {

@@ -3,6 +3,7 @@ import entities.Player;
 import entities.Boss;
 import mechanics.Deck;
 import java.util.Scanner;
+import static core.DisplayManager.clearInputBuffer;
 
 public class GameEngine {
     private Scanner scanner;
@@ -23,13 +24,13 @@ public class GameEngine {
             DisplayManager.type("Your current chips: " + player.getChips());
             DisplayManager.type(boss.getName() + "'s chips: " + boss.getChips());
             DisplayManager.type("How many chips do you dare to bet?");
-
             // --- THE BETTING PHASE ---
             int bet =  0;
             boolean validBet = false;
 
             while (!validBet) {
                 try {
+                    clearInputBuffer();
                     String input = scanner.nextLine();
                     bet = Integer.parseInt(input);
 
@@ -64,8 +65,17 @@ public class GameEngine {
             // --- ALICE'S TURN ---
             boolean usedRabbit = false;
             boolean isPlayerTurn = true;
+
             while (isPlayerTurn && player.calculateScore() < 21) {
-                DisplayManager.type("Do you want to (H)it, (S)tand or open (I)nventory?");
+                boolean canDouble = player.getHandSize() == 2 && player.getChips() >= (bet * 2);
+
+                if (canDouble) {
+                    DisplayManager.type("Do you want to (H)it, (S)tand, (D)ouble or open (I)nventory?");
+                } else {
+                    DisplayManager.type("Do you want to (H)it, (S)tand or open (I)nventory?");
+                }
+
+                clearInputBuffer();
                 String choice = scanner.nextLine().toUpperCase();
 
                 switch (choice) {
@@ -83,9 +93,23 @@ public class GameEngine {
                         player.openInventory(scanner);
 
                         System.out.println("\n--- BACK TO THE TABLE ---");
-                        DisplayManager.type(player.getName() + "'s score is: " + player.calculateScore());
+                        DisplayManager.type(player.getName() + "'s score is: " + player.getScoreDisplay());
                     }
-                    default -> DisplayManager.type("Invalid choice! Type H, S or I!");
+                    case "D" -> {
+                        if (canDouble) {
+                            DisplayManager.type(player.getName() + " DOUBLES DOWN! Bet increased to " + (bet * 2) + "!");
+                            bet *= 2;
+
+                            DisplayManager.type(player.getName() + " draws ONE final card...");
+                            player.addCardToHand(deck.drawCard());
+                            player.showHand();
+
+                            isPlayerTurn = false;
+                        } else {
+                            DisplayManager.type("You can't double down right now! (Not enough chips or already hit)");
+                        }
+                    }
+                    default -> DisplayManager.type("Invalid choice! Type H, S, D or I!");
                 }
 
             }
@@ -109,7 +133,7 @@ public class GameEngine {
             boss.showHand();
             DisplayManager.pause(1500);
 
-            boss.playTurn(deck);
+            boss.playTurn(deck, player);
 
             DisplayManager.type("\n--- FINAL TABLE ---");
             boss.showHand();
@@ -122,6 +146,9 @@ public class GameEngine {
             }
             int bossScore = boss.calculateScore();
 
+            boolean playerHasBJ = player.hasBlackjack() && !usedRabbit;
+            boolean bossHasBJ = boss.hasBlackjack();
+
             System.out.println("\n*** FINAL RESULTS ***");
             DisplayManager.type(player.getName() + "'s Score: " + playerScore);
             DisplayManager.type(boss.getName() + "'s Score: " + bossScore);
@@ -129,17 +156,32 @@ public class GameEngine {
             DisplayManager.pause(1500);
 
             // Payout logic
-            if (bossScore > 21) {
+            if (playerHasBJ && !bossHasBJ) {
+                // 3:2
+                int winnings = (int) (bet * 1.5);
+                DisplayManager.type("BLACKJACK! You win a 3:2 payout! (+" + winnings + " chips)");
+                player.adjustChips(winnings);
+                boss.adjustChips(-winnings);
+
+            } else if (!playerHasBJ && bossHasBJ) {
+                DisplayManager.type(boss.getName() + " hit a natural BLACKJACK! You lose!");
+                player.adjustChips(-bet);
+                boss.adjustChips(bet);
+
+            } else if (bossScore > 21) {
                 DisplayManager.type(boss.getName() + " busts! YOU SURVIVE AND WIN THE BET!");
                 player.adjustChips(bet);
                 boss.adjustChips(-bet);
+
             } else if (playerScore > bossScore) {
                 DisplayManager.type("You beat " + boss.getName() + "'s score! YOU SURVIVE AND WIN THE BET!");
                 player.adjustChips(bet);
                 boss.adjustChips(-bet);
+
             } else if (playerScore == bossScore) {
                 DisplayManager.type("It's a tie! " + boss.getName() + " spares you... your chips are returned.");
                 // No chips are added or lost
+
             } else {
                 DisplayManager.type(boss.getName() + " wins! You lose your bet!");
                 player.adjustChips(-bet);

@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import static core.DisplayManager.clearInputBuffer;
+
 public class Shop {
     private ArrayList<Item> catalog;
 
@@ -53,6 +55,7 @@ public class Shop {
             boolean validChoice = false;
             while (!validChoice) {
                 try {
+                    clearInputBuffer();
                     String input = scanner.nextLine();
                     choice = Integer.parseInt(input);
 
