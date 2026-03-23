@@ -47,12 +47,21 @@ This project was built to be easily maintainable and highly scalable. Key archit
 
 Wonderland is packaged as an executable and is ready to play. No IDE is required.
 
-**[👉 Click here to download the latest game folder (v1.0.0)](https://github.com/miguel-herrog/HeartsQueen-Blackjack/releases/download/v1.1.0/wonderland-v1.1.0-windows.zip)**
+**[👉 Click here to download the latest game folder (v1.2.0)](https://github.com/miguel-herrog/HeartsQueen-Blackjack/releases/download/v1.2.0/wonderland-v1.2.0-windows.zip)**
 
 1. Download the `.zip` file from the link above.
 2. Extract the contents to any folder on your computer.
 3. Ensure all three files (`Wonderland.jar`, `events.txt`, and `run.bat`) are in the same directory.
 4. Double-click **`run.bat`** to start your journey into Wonderland.
+
+---
+
+### 🎰 Casino Mechanics & QoL
+* **Authentic Payouts:** Implemented true 3:2 payouts for natural Blackjacks.
+* **Double Down:** Players can strategically double their initial bet on their opening hand in exchange for receiving exactly one final card.
+* **Dynamic Boss AI:** Bosses actively track the player's current score and adjust their Hit/Stand decisions dynamically to ensure a competitive challenge.
+* **Inventory Sublists:** The UI dynamically filters and separates Active and Passive items to prevent input errors and improve user experience.
+* **Input Buffer Management:** Engineered a system to clear the `System.in` buffer before critical prompts, preventing queued accidental keystrokes during text animations.
 
 ---
 
