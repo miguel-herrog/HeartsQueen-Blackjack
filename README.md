@@ -18,6 +18,7 @@ This project was built to be easily maintainable and highly scalable. Key archit
 * **Factory & Registry Patterns (Dynamic Shop):** In-game items are managed through an `ItemRegistry`. The `Shop` class generates its inventory dynamically by requesting random registered IDs from the Factory, ensuring the Shop logic remains completely agnostic of the actual item implementations.
 * **Single Responsibility Principle (UI & Visuals):** * **`DisplayManager`**: Handles the "Game Feel", creating a custom typewriter effect and managing execution pauses.
     * **`ArtManager`**: Uses `HashMap` data structures to store and retrieve ASCII art with O(1) time complexity, keeping the core game engine free of visual clutter.
+* **Polymorphism & Abstract Classes (Enemy AI):** The game features multiple bosses with distinct behaviors. This was achieved by creating an abstract `Boss` class. Specific enemies (like the `Queen` or `MadHatter`) inherit from this template and implement polymorphic `playTurn()` methods, completely decoupling the game loop from specific enemy logic.
 
 ---
 
@@ -46,7 +47,7 @@ This project was built to be easily maintainable and highly scalable. Key archit
 
 Wonderland is packaged as an executable and is ready to play. No IDE is required.
 
-**[👉 Click here to download the latest game folder (v1.0.0)](https://github.com/miguel-herrog/HeartsQueen-Blackjack/releases/download/v1.0.0/wonderland-v1.0.0-windows.zip)**
+**[👉 Click here to download the latest game folder (v1.0.0)](https://github.com/miguel-herrog/HeartsQueen-Blackjack/releases/download/v1.1.0/wonderland-v1.1.0-windows.zip)**
 
 1. Download the `.zip` file from the link above.
 2. Extract the contents to any folder on your computer.
