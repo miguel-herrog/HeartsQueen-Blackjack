@@ -1,3 +1,0 @@
-Found Chips|You trip over a small, velvet bag... You found 50 chips inside!|50
-Mushroom|You find a glowing blue mushroom and take a bite... You feel lucky!|30
-Ringing Phone|Riiiing... You pick up the black phone. 'Leave your chips...'|-20

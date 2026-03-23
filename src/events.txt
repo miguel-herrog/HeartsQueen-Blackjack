@@ -1,0 +1,13 @@
+# --- EVENTOS POSITIVOS ---
+White Rabbit's Stash | You step on a dropped pocket watch. Hidden inside are golden chips! | +50
+Mushroom Snack | You eat a strange blue mushroom. You feel incredibly lucky... and rich! | +100
+Caterpillar's Wisdom | "Who... are... you?" the Caterpillar asks, handing you some chips for your time. | +40
+Glitch in the Matrix | A mechanical slot machine bursts open, spilling chips at your feet. | +75
+Drink Me | You find a bottle labeled "DRINK ME". It tastes like cherry tart and victory! | +30
+
+# --- EVENTOS NEGATIVOS ---
+Tweedle Tax | Tweedledum and Tweedledee block your path and demand a toll to pass. | -30
+Pickpocket Guard | A Two of Spades bumps into you. Your pockets feel lighter. | -25
+Down the Hole | You trip and fall down a mini rabbit hole, dropping some chips in the dark! | -40
+The Duchess's Pepper | You sneeze violently from a cloud of pepper and drop your money. | -15
+Mad Tea Spill | A teapot flies out of nowhere and ruins your clothes. You pay the dry cleaning. | -50

@@ -1,8 +1,7 @@
 package events;
 
 import entities.Player;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,15 +17,21 @@ public class EventManager {
     }
 
     /**
-     * Reads events.txt and populates the event pool dynamically.
+     * Reads events.txt from INSIDE the .jar and populates the event pool dynamically.
      */
     private static void loadEventsFromFile() {
         try {
-            File file = new File("events.txt");
-            Scanner scanner = new Scanner(file);
+            InputStream is = EventManager.class.getResourceAsStream("/events.txt");
 
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+            if (is == null) {
+                System.out.println("ERROR CRÍTICO: No se ha encontrado el archivo de eventos blindado.");
+                return;
+            }
+
+            Scanner fileScanner = new Scanner(is);
+
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
 
                 // Skip empty lines or comments
                 if (line.trim().isEmpty() || line.startsWith("#")) {
@@ -34,7 +39,6 @@ public class EventManager {
                 }
 
                 // Split the line by the pipe character '|'
-                // '|' is a special character, escape it with '\\|'
                 String[] parts = line.split("\\|");
 
                 if (parts.length == 3) {
@@ -45,9 +49,8 @@ public class EventManager {
                     eventPool.add(new GenericEvent(name, description, modifier));
                 }
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("[WARNING] events.txt not found! Event pool will be empty.");
+            fileScanner.close();
+
         } catch (Exception e) {
             System.out.println("[WARNING] Error parsing events.txt: " + e.getMessage());
         }
@@ -62,7 +65,7 @@ public class EventManager {
         Random dice = new Random();
         int roll = dice.nextInt(100) + 1;
 
-        if (roll <= 40) {
+        if (roll <= 100) {
             int randomIndex = dice.nextInt(eventPool.size());
             RandomEvent chosenEvent = eventPool.get(randomIndex);
             chosenEvent.trigger(player);
