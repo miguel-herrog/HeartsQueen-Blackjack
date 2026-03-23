@@ -19,19 +19,23 @@ public class Main {
         GameEngine engine = new GameEngine();
         Shop merchant = new Shop();
 
-        DisplayManager.type("Welcome to Wonderland! A game of life, death, and chips.");
+        StoryManager.playIntro();
         DisplayManager.pause(1000);
 
         // --- Floor 1: Mad Hatter ---
         if (currentFloor <= 1) {
+            StoryManager.playMadHatterIntro();
+
             if (!engine.startEncounter(alice, new MadHatter())) return;
+
             events.EventManager.rollForEvent(alice);
             merchant.visitShop(alice, mainScanner, 2);
         }
 
         // --- Floor 2: Cheshire Cat ---
         if (currentFloor <= 2) {
-            DisplayManager.type("\n--- YOU ENTER THE DARK FOREST ---");
+            StoryManager.playCheshireIntro();
+
             if (!engine.startEncounter(alice, new CheshireCat())) return;
             events.EventManager.rollForEvent(alice);
             merchant.visitShop(alice, mainScanner, 3);
@@ -39,13 +43,11 @@ public class Main {
 
         // --- Floor 3: The Queen ---
         if (currentFloor <= 3) {
-            DisplayManager.type("\n--- YOU ENTER THE ROYALE PALACE ---");
-            if (engine.startEncounter(alice, new Queen())) {
-                System.out.println("\n===============================================");
-                DisplayManager.type("YOU BANKRUPTED THE QUEEN! YOU ESCAPED WONDERLAND!");
-                DisplayManager.type("Final Chips: " + alice.getChips());
-                System.out.println("===============================================");
+            StoryManager.playQueenIntro();
 
+            if (engine.startEncounter(alice, new Queen())) {
+
+                StoryManager.playVictory(alice.getChips());
                 saveManager.deleteSave();
             }
         }

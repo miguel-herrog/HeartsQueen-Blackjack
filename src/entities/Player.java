@@ -19,6 +19,13 @@ public class Player {
         this.chips = 100;
     }
 
+    public Player(String name, int startingChips) {
+        this.name = name;
+        this.hand = new ArrayList<>();
+        this.inventory = new ArrayList<>();
+        this.chips = startingChips;
+    }
+
     public String getName() {
         return name;
     }

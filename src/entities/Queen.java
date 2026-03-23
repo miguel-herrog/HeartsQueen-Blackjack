@@ -1,25 +1,39 @@
 package entities;
-import core.DisplayManager;
-import core.GameEngine;
-import mechanics.Deck;
 
-public class Queen extends Player {
+import core.DisplayManager;
+import mechanics.Deck;
+import mechanics.Card;
+
+public class Queen extends Boss {
+
     public Queen() {
-        super ("Queen of Hearts");
+        super("Queen of Hearts", 1000);
     }
 
+    @Override
     public void playTurn(Deck deck) {
-        DisplayManager.type("\n--- THE QUEEN OF HEARTS TURN ---");
         DisplayManager.pause(1000);
-        this.showHand();
+        DisplayManager.type("\n--- THE QUEEN'S ROYAL TURN ---", 20);
 
-        while (this.calculateScore() < 17) {
-            DisplayManager.pause(1500);
-            DisplayManager.type("Queen slams the table! 'Give me another card!'");
+        // (Soft 17 rule)
+        while (calculateScore() < 17) {
             DisplayManager.pause(1000);
-            this.addCardToHand(deck.drawCard());
-            this.showHand();
+            DisplayManager.type("Queen: \"Another card! And make it quick!\"", 30);
+
+            Card drawnCard = deck.drawCard();
+            addCardToHand(drawnCard);
+
+            System.out.println("-> Queen draws: " + drawnCard.toString());
+            DisplayManager.pause(500);
         }
-        DisplayManager.pause(2000);
+
+        DisplayManager.pause(1000);
+        int finalScore = calculateScore();
+
+        if (finalScore > 21) {
+            DisplayManager.type("Queen: \"NO! IMPOSSIBLE! WHO SHUFFLED THIS DECK?! EXECUTE THE DEALER!\" (BUSTS with " + finalScore + ")", 30);
+        } else {
+            DisplayManager.type("Queen: \"Read 'em and weep, Alice.\" (Stands with " + finalScore + ")", 30);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package core;
 import entities.Player;
+import entities.Boss;
 import mechanics.Deck;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class GameEngine {
         this.scanner = new Scanner(System.in);
     }
 
-    public boolean startEncounter(Player player, Player boss) {
+    public boolean startEncounter(Player player, Boss boss) {
 
         DisplayManager.type("\n*** A new challenger approaches: " + boss.getName() + "! ***");
         System.out.println(core.ArtManager.getArt(boss.getName()));
@@ -96,14 +97,23 @@ public class GameEngine {
                 } else {
                     DisplayManager.type("BUST! You went over 21. " + boss.getName() + " laughs as you lose your chips!");
                     player.adjustChips(-bet);
+                    boss.adjustChips(bet);
                     DisplayManager.pause(2000);
-                    continue; // Skip the boss's turn and jump to the next round immediately
+                    continue; // Skip the boss's turn and jump to the next round
                 }
             }
             DisplayManager.pause(2000);
 
             // --- THE BOSS'S TURN ---
+            DisplayManager.type("\n" + boss.getName() + " flips their hidden card!");
+            boss.showHand();
+            DisplayManager.pause(1500);
+
             boss.playTurn(deck);
+
+            DisplayManager.type("\n--- FINAL TABLE ---");
+            boss.showHand();
+            DisplayManager.pause(1000);
 
             // --- THE VERDICT ---
             int playerScore = player.calculateScore();
@@ -140,7 +150,9 @@ public class GameEngine {
         // --- END OF THE ENCOUNTER ---
         if (player.getChips() <= 0) {
             System.out.println("\n*** BANKRUPT ***");
-            DisplayManager.type(boss.getName() + " took all your chips! The guards drag you away.");
+
+            StoryManager.playGameOver();
+
             saveManager.deleteSave();
             return false; // You Lost
 

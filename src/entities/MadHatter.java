@@ -1,25 +1,37 @@
 package entities;
-import core.DisplayManager;
-import core.GameEngine;
-import mechanics.Deck;
 
-public class MadHatter extends Player {
+import core.DisplayManager;
+import mechanics.Deck;
+import mechanics.Card;
+
+public class MadHatter extends Boss {
     public MadHatter() {
-        super ("The Mad Hatter");
+        super("The Mad Hatter", 200);
     }
 
+    @Override
     public void playTurn(Deck deck) {
-        DisplayManager.type("\n--- THE MAD HATTER'S TURN ---");
         DisplayManager.pause(1000);
-        this.showHand();
+        DisplayManager.type("\n--- THE HATTER'S CHAOTIC TURN ---", 20);
 
-        while (this.calculateScore() < 15) {
-            DisplayManager.pause(1500);
-            DisplayManager.type("The Hatter nervously pours some tea and draws a card...");
+        while (calculateScore() < 15) {
             DisplayManager.pause(1000);
-            this.addCardToHand(deck.drawCard());
-            this.showHand();
+            DisplayManager.type("Mad Hatter: \"More tea! MORE CARDS!\"", 30);
+
+            Card drawnCard = deck.drawCard();
+            addCardToHand(drawnCard);
+
+            System.out.println("-> Hatter draws: " + drawnCard.toString());
+            DisplayManager.pause(500);
         }
-        DisplayManager.pause(2000);
+
+        DisplayManager.pause(1000);
+        int finalScore = calculateScore();
+
+        if (finalScore > 21) {
+            DisplayManager.type("Mad Hatter: \"Oh dear... my hat is too tight...\" (BUSTS with " + finalScore + ")", 30);
+        } else {
+            DisplayManager.type("Mad Hatter: \"I'm perfectly fine! Your turn, Alice!\" (Stands with " + finalScore + ")", 30);
+        }
     }
 }
